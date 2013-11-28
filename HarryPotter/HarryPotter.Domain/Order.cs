@@ -19,7 +19,32 @@ namespace HarryPotter.Domain
         {
             this.Items = new List<OrderItem>();
             foreach (Book book in books)
-                this.Items.Add(new OrderItem(book));
+                this.AddBook(book, 0);
         }
+
+        public OrderItem AddBook(Book book01, int quantity)
+        {
+            OrderItem item = new OrderItem(book01);
+            item.Quantity = quantity;
+            this.Items.Add(item);
+            return item;
+        }
+
+        public double GeTotal()
+        {
+            double total = 0;
+
+            foreach (OrderItem item in this.Items)
+            {
+                total += item.Book.Price * item.Quantity;
+            }
+            /*foreach (OrderItem item in this.Items)
+                total = (item.Book.Price-(item.Book.Price*0.1)) * item.Quantity;
+            */
+
+            return total;
+        }
+
+        
     }
 }
