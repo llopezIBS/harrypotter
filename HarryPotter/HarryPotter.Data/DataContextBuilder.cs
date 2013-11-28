@@ -21,11 +21,7 @@ namespace HarryPotter.Data
         public static NHibernate.ISession BuildSession()
         {
             string cnn = ConfigurationManager.ConnectionStrings["storedb_development"].ConnectionString;
-            ISessionFactory factory = Fluently.Configure()
-                .Database(
-                    MySQLConfiguration.Standard
-                        .ConnectionString(cnn)
-                )
+            ISessionFactory factory = Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(cnn))
                 .Cache(c => c.ProviderClass<NHibernate.Cache.NoCacheProvider>().UseQueryCache())
                 .Mappings(m =>
                 {
